@@ -6,7 +6,7 @@ var UserSchema = new Schema({
   password:String,
   avatar:{
     type:String,
-    default:'./public/images/default-avatar.jpg'
+    default:'/images/default-avatar.jpg'
   },
   title:{
     type:String,
