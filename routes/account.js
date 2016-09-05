@@ -1,6 +1,14 @@
 var router = require('express').Router();
 var User = require('../models/user');
 
+router.route('/login')
+  .get( function(req, res){
+    res.render('account/login');
+  })
+  .post(function(req,res,next){
+    res.status(201).end('登录成功');
+  });
+
 router.route('/register')
     .get(function (req, res) {
         res.render('account/register', {title: '注册'});
