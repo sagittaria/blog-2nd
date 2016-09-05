@@ -16,7 +16,7 @@
       <input name="password" type="password"
              class="form-control" placeholder="密码">
 
-      <button class="btn btn-success" class="login">登录</button>
+      <a class="btn btn-success" class="login" onclick="loginJS()">登录</a>
     </form>
 
     <div class="operation">
@@ -28,6 +28,17 @@
 
   </div>
 </div>
-
+<script type="text/javascript">
+  function loginJS(){
+    $.post('', $('form').serialize())
+      .done(function(res){
+        alert(res);
+      })
+      .fail(function(res){
+        $('.alert').hide();
+        $('.alert-danger').html(res.responseText).show();
+      });
+  }
+</script>
 </body>
 </html>
