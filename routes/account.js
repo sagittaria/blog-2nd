@@ -6,7 +6,17 @@ router.route('/login')
     res.render('account/login');
   })
   .post(function(req,res,next){
-    res.status(201).end('登录成功');
+    var username = req.body.username || '',
+        password = req.body.password || '';
+
+    User.findOne({username:username,password:password},function(err,user){
+      if (err) return next(err);    // 交给接下来的错误处理中间件
+      if(user){
+        res.status(201).end('登录成功');
+      }else{
+        res.status(400).end('用户名或密码错误'); 
+      }
+    }); 
   });
 
 router.route('/register')
