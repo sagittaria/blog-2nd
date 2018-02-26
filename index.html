@@ -1,0 +1,44 @@
+<script type="text/javascript" src="vue.js"></script>
+
+<div id="writer">
+  <textarea></textarea>
+  <button v-on:click='add'>add</button>
+  <ul>
+    <app-memos
+    v-for="memo in memos"
+    v-bind:memo="memo"
+    v-bind:key="memo.id"
+    ></app-memos>
+  </ul>
+</div>
+
+
+<script type="text/javascript">
+
+Vue.component('app-memos', {
+    props:["memo"],
+    template:"<li>({{memo.id}}) {{memo.date}} {{memo.time}} {{memo.text}}</li>"
+  });
+
+  latestMemos = [{id:3, date:'2018-01-03', time:'10:30:25', text:'text 3'},
+  {id:2, date:'2018-01-02', time:'09:20:10', text:'text 2'},
+  {id:1, date:'2018-01-01', time:'08:10:05', text:'text 1'}];
+
+  var app = new Vue({
+    el: '#writer',
+    data: {
+      memos:latestMemos
+    },
+    methods:{
+      add:function add() {
+        this.memos.splice(0,0,{id:this.nextId, date:'2018-01-04', time:'14:40:25', text:'text 4'});
+      }
+    },
+    computed:{
+      nextId:function nextId(){
+        return this.memos.length+1;
+      }
+    }
+  })
+
+</script>
